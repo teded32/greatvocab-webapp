@@ -33,8 +33,12 @@ def get_word_details():
 
 		detail = [row['Word'], int(row['WStatus']),lastseen]
 
-		word_details.append(detail)
-
+		if detail == "0":
+			word_details.append("Not Seen")
+		elif detail == "1":
+			word_details.append("In Review")
+		else:
+			word_details.append("Learned")
 
 	return word_details
 
