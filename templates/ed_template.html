@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+	
+  {% for det in word_details %}
+
+    <tr class="row100 body">
+      <td class="cell100 column1">{{det[0]}}</td>
+      <td class="cell100 column2">{{det[2]}}</td>
+      <td class="cell100 column3">{{det[1]}}</td>
+    </tr>
+  {% endfor %}
+
+
+{% endblock %}
