@@ -3,11 +3,13 @@ from flask import Flask, render_template
 import datetime
 from boto3.dynamodb.conditions import Key, Attr
 
+from creds import aws_key
+from creds import aws_id
+
 app = Flask(__name__)
 
-
-ACCESS_ID = "id"
-ACCESS_KEY = "key"
+ACCESS_ID = aws_id
+ACCESS_KEY = aws_key
 
 dynamodb = boto3.resource('dynamodb', 
 		region_name='us-east-1', 
