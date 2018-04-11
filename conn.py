@@ -24,21 +24,27 @@ def get_word_details():
 	word_list = []
 	word_details = []
 
+	statuses = {0:"Not Learned",1:"In Review", 2:"Learned"}
+	nums = {"Not Learned":0 ,"In Review":1, "Learned":2}
+
 	for row in r2['Items']:
 		word_list.append(row['Word'])
 
 		unixtime = float(row['LastSeen'])
-
-		lastseen = datetime.datetime.fromtimestamp(unixtime).strftime('%m-%d-%Y %H:%M')
-
-		detail = [row['Word'], int(row['WStatus']),lastseen]
-
-		if detail == "0":
-			word_details.append("Not Seen")
-		elif detail == "1":
-			word_details.append("In Review")
+		if unixtime < 315532800:
+			lastseen = "-"
 		else:
-			word_details.append("Learned")
+			lastseen = datetime.datetime.fromtimestamp(unixtime).strftime('%m-%d-%Y %H:%M')
+
+		status_num =int(row['WStatus'])
+		word_status = statuses[status_num]
+
+		detail = [row['Word'], word_status,lastseen]
+
+		word_details.append(detail)
+
+	word_details.sort(key = lambda x: x[0])
+	word_details.sort(key = lambda x: nums[x[1]], reverse=True)
 
 	return word_details
 
